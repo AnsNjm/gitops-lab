@@ -1,3 +1,27 @@
+
+backend:
+  replicaCount: 1
+
+  image:
+    repository: task-backend
+    tag: latest
+
+  port: 5000
+
+frontend:
+  replicaCount: 1
+
+  image:
+    repository: task-frontend
+    tag: latest
+
+  port: 80
+
+mongodb:
+  image:
+    repository: mongo
+    tag: "8"
+
 # # Default values for helm.
 # # This is a YAML-formatted file.
 # # Declare variables to be passed into your templates.
@@ -159,29 +183,5 @@
 # tolerations: []
 
 # affinity: {}
-
-
-backend:
-  replicaCount: 1
-
-  image:
-    repository: task-backend
-    tag: latest
-
-  port: 5000
-
-frontend:
-  replicaCount: 1
-
-  image:
-    repository: task-frontend
-    tag: latest
-
-  port: 80
-
-mongodb:
-  image:
-    repository: mongo
-    tag: "8"
 
   storage: 1Gi

@@ -2,9 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: gitops-lab-ns
 spec:
-  replicas: 1
+  replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
       app: frontend
@@ -15,22 +14,19 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: task-fronend
-          imagePullPolicy: IfNotPresent
+          image:  "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.frontend.port }}
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: gitops-lab-ns
 spec:
-  type: NodePort
   selector:
     app: frontend
-  ports:  
-   - port: 80
-     targetPort: 80
+  ports:
+    - port: {{ .Values.frontend.port }}
+      targetPort: {{ .Values.frontend.port }}
+  type: ClusterIP
