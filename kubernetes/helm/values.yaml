@@ -3,7 +3,7 @@ backend:
   replicaCount: 1
 
   image:
-    repository: task-backend
+    repository: anassnajam/task-backend
     tag: latest
 
   port: 5000
@@ -12,7 +12,7 @@ frontend:
   replicaCount: 1
 
   image:
-    repository: task-frontend
+    repository: anassnajam/task-frontend
     tag: latest
 
   port: 80
