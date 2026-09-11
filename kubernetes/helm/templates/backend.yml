@@ -17,17 +17,17 @@ spec:
     spec:
       containers:
         - name: backend
-          image: "{{ .Values.backend.image.repository }}: {{.Values.backend.image.tag }}"
+          image: "{{ .Values.backend.image.repository }}:{{.Values.backend.image.tag }}"
 
           ports:
             - containerPort: {{ .Values.backend.port }}
 
           env:
             - name: PORT
-              values: "{{ .Values.backend.port }}"
+              value: "{{ .Values.backend.port }}"
             
             - name: MONGO_URI
-              values: "mongodb://mongodb:27017/taskmanager"
+              value: "mongodb://mongodb:27017/taskmanager"
 
           readinessProbe:
             httpGet:
