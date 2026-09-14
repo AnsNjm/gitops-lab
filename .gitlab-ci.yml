@@ -1,0 +1,40 @@
+stages:
+  - test
+  - build
+
+variables:
+  - DOCKER_DRIVER: overlay2
+  - BACKEND_IMAGE: $DOCKER_USERNAME/task-backend
+  - FRONTEND_IMAGE: $DOCKER_USERNAME/task-frontend
+
+test:
+  stage: test
+  image: node:20
+  scrip:
+    - echo "Running Test stage"
+    - cd ./mern-crud-app/backend
+    - npm install
+    - npm test || true
+
+build-backend:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before-script:
+    - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  script:
+    - docker build -t "$BACKEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/backend
+    - docker push "$BACKEND_IMAGE:$CI_COMMIT_SHA"
+
+build-frontend:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before-script:
+    - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  script:
+    - docker build -t task-frontend ./mern-crud-app/frontend
+    - docker push "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
+  
