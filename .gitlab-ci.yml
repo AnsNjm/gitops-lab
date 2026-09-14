@@ -21,7 +21,7 @@ build-backend:
   image: docker:latest
   services:
     - docker:dind
-  before-script:
+  before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   script:
     - docker build -t "$BACKEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/backend
@@ -32,7 +32,7 @@ build-frontend:
   image: docker:latest
   services:
     - docker:dind
-  before-script:
+  before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   script:
     - docker build -t task-frontend ./mern-crud-app/frontend
