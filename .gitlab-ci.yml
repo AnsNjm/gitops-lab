@@ -3,9 +3,9 @@ stages:
   - build
 
 variables:
-  - DOCKER_DRIVER: overlay2
-  - BACKEND_IMAGE: "$DOCKER_USERNAME/task-backend"
-  - FRONTEND_IMAGE: "$DOCKER_USERNAME/task-frontend"
+  DOCKER_DRIVER: overlay2
+  BACKEND_IMAGE: "$DOCKER_USERNAME/task-backend"
+  FRONTEND_IMAGE: "$DOCKER_USERNAME/task-frontend"
 
 test:
   stage: test
