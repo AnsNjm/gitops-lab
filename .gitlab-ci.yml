@@ -4,13 +4,13 @@ stages:
 
 variables:
   - DOCKER_DRIVER: overlay2
-  - BACKEND_IMAGE: $DOCKER_USERNAME/task-backend
-  - FRONTEND_IMAGE: $DOCKER_USERNAME/task-frontend
+  - BACKEND_IMAGE: "$DOCKER_USERNAME/task-backend"
+  - FRONTEND_IMAGE: "$DOCKER_USERNAME/task-frontend"
 
 test:
   stage: test
   image: node:20
-  scrip:
+  script:
     - echo "Running Test stage"
     - cd ./mern-crud-app/backend
     - npm install
