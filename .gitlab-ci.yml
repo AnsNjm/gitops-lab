@@ -35,6 +35,6 @@ build-frontend:
   before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   script:
-    - docker build -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend
+    - docker build -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend/frontend
     - docker push "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
   
