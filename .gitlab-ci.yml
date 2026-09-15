@@ -4,8 +4,8 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  BACKEND_IMAGE: "$DOCKER_USERNAME/task-backend"
-  FRONTEND_IMAGE: "$DOCKER_USERNAME/task-frontend"
+  BACKEND_IMAGE: "$DOCKERHUB_USERNAME/task-backend"
+  FRONTEND_IMAGE: "$DOCKERHUB_USERNAME/task-frontend"
 
 test:
   stage: test
