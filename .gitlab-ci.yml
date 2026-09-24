@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+  - gitops
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -38,3 +39,20 @@ build-frontend:
     - docker build -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend/frontend
     - docker push "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
   
+update-helm:
+  stage: gitops
+  image: alpine:latest
+
+  before-script:
+    - apk add --no-cache git
+    - git config --global user.name "GitLab CI"
+    - git config --global user.email "gitlab-ci@example.com"
+
+  script:
+
+    - sed -i "s/tag: \"latest\"/tag: \"$CI_COMMIT_SHA\"/g" helm/values.yaml
+
+    - git add helm/values.yaml
+    - git commit -m "chore: update images to $CI_COMMIT_SHA" || echo "No changes to commit"
+
+    - git push "https://oauth2:${GITLAB_TOKEN}@gitlab.com/ansnjm19/gitops-lab.git" HEAD:main
