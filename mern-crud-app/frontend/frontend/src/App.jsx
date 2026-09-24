@@ -106,7 +106,7 @@ function App() {
         fontFamily: "Arial",
       }}
     >
-      <h1>Task Manager</h1>
+      <h1>Task Manager 2.0</h1>
 
       {error && (
         <p style={{ color: "red" }}>
