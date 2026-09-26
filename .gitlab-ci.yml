@@ -49,7 +49,20 @@ update-helm:
     - git config --global user.email "gitlab-ci@example.com"
 
   script: 
-    - 'sed -i "s/tag: \"latest\" /tag: \"$CI_COMMIT_SHA\"/g" kubernetes/helm/values.yaml'
+    - echo "CI_COMMIT_SHA = $CI_COMMIT_SHA"
+    
+    - echo "Before update:"
+    - grep -n "tag:" kubernetes/helm/values.yaml
+
+    - yq -i ".backend.image.tag = \"$CI_COMMIT_SHA\"" kubernetes/helm.values.yaml
+    - yq -i ".frontend.image.tag = \"$CI_COMMIT_SHA\"" kubernetes/helm/values.YAML
+
+    - echo "After update:"
+    - grep -n "tag:" kubernetes/helm/values.yaml
+
     - git add kubernetes/helm/values.yaml
-    - 'git commit -m "chore: update images to $CI_COMMIT_SHA" || echo "No changes to commit"'
+    - git diff --cached
+
+    - git commit -m "chore: update images to $CI_COMMIT_SHA [skip ci]" || echo "No changes to commit"
+
     - git push "https://oauth2:${GITLAB_TOKEN}@gitlab.com/ansnjm19/gitops-lab.git" HEAD:main
