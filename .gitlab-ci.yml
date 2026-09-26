@@ -55,7 +55,7 @@ update-helm:
     - echo "Before update:"
     - grep -n "tag:" kubernetes/helm/values.yaml
 
-    - yq -i ".backend.image.tag = \"$CI_COMMIT_SHA\"" kubernetes/helm.values.yaml
+    - yq -i ".backend.image.tag = \"$CI_COMMIT_SHA\"" kubernetes/helm/values.yaml
     - yq -i ".frontend.image.tag = \"$CI_COMMIT_SHA\"" kubernetes/helm/values.YAML
 
     - echo "After update:"
