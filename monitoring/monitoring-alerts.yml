@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: gitops-lab-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: gitops-lab
+      rules:
+
+        - alert: PodDown
+          expr: kube_pod_status_ready{condition="true"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod is not ready"
+            description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has been unavailable for more than 5 minutes."

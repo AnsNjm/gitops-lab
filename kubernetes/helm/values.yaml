@@ -1,6 +1,6 @@
 
 backend:
-  replicaCount: 2
+  replicaCount: 0
   image:
     repository: anassnajam/task-backend
     tag: 48e8c0af201cfe8fbd06b6066da2e17951ff1647
