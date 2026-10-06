@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: poddown-test
+  namespace: gitops-lab-ns
+spec:
+  containers:
+    - name: test
+      image: nginx
+      readinessProbe:
+        httpGet:
+          path: /does-not-exist
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 10
