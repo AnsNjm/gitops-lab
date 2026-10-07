@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: discord-notifications
-  namespace: monitoring
+  namespace: gitops-lab-ns
   labels:
     alertmanagerConfig: monitoring
 
@@ -15,4 +15,4 @@ spec:
       discordConfigs:
         - apiURL:
             name: alertmanager-discord-webhook
-            key: 'webhook-url'
+            key: webhook-url
