@@ -32,7 +32,7 @@ build-backend:
     - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |
       sh -s -- -b /usr/local/bin
   script:
-    - docker build -t "$BACKEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/backend
+    - docker build --pull --no-cache -t "$BACKEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/backend
     - trivy image --image-src docker --severity HIGH,CRITICAL --exit-code 1 "$BACKEND_IMAGE:$CI_COMMIT_SHA"
     - docker push "$BACKEND_IMAGE:$CI_COMMIT_SHA"
 
@@ -51,7 +51,7 @@ build-frontend:
     - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |
       sh -s -- -b /usr/local/bin
   script:
-    - docker build -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend/frontend
+    - docker build --pull --no-cache -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend/frontend
     - trivy image --image-src docker --severity HIGH,CRITICAL --exit-code 1 "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
     - docker push "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
   
