@@ -19,24 +19,40 @@ test:
 
 build-backend:
   stage: build
-  image: docker:latest
+  image: docker:cli
   services:
-    - docker:dind
+    - name: docker:dind
+      command: ["--tls=false"]
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - apk add --no-cache curl
+    - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |
+      sh -s -- -b /usr/local/bin
   script:
     - docker build -t "$BACKEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/backend
+    - trivy image --severity HIGH,CRITICAL --exit-code 1
     - docker push "$BACKEND_IMAGE:$CI_COMMIT_SHA"
 
 build-frontend:
   stage: build
-  image: docker:latest
+  image: docker:cli
   services:
-    - docker:dind
+    - name: docker:dind
+      command: ["--tls=false"]
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - apk add --no-cache curl
+    - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh |
+      sh -s -- -b /usr/local/bin
   script:
     - docker build -t "$FRONTEND_IMAGE:$CI_COMMIT_SHA" ./mern-crud-app/frontend/frontend
+    - trivy image --severity HIGH,CRITICAL --exit-code 1
     - docker push "$FRONTEND_IMAGE:$CI_COMMIT_SHA"
   
 update-helm:
