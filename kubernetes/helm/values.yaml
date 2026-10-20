@@ -3,7 +3,7 @@ backend:
   replicaCount: 2
   image:
     repository: anassnajam/task-backend
-    tag: 807130bdae0d95939da1a48d654684f206c476e7
+    tag: 0d5b871e3cb3ef4aebfedbe7331e689f9ae061d6
   port: 5000
   resources:
     requests:
@@ -21,7 +21,7 @@ frontend:
   replicaCount: 1
   image:
     repository: anassnajam/task-frontend
-    tag: 807130bdae0d95939da1a48d654684f206c476e7
+    tag: 0d5b871e3cb3ef4aebfedbe7331e689f9ae061d6
   port: 80
 mongodb:
   image:
