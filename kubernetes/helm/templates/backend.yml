@@ -19,6 +19,9 @@ spec:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{.Values.backend.image.tag }}"
 
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+
           ports:
             - containerPort: {{ .Values.backend.port }}
 
