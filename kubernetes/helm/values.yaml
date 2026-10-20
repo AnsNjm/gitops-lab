@@ -3,9 +3,8 @@ backend:
   replicaCount: 2
   image:
     repository: anassnajam/task-backend
-    tag: f60a99a8dfabea213802a6649cf595686790ed5e
+    tag: 807130bdae0d95939da1a48d654684f206c476e7
   port: 5000
-
   resources:
     requests:
       cpu: 100m
@@ -13,22 +12,17 @@ backend:
     limits:
       cpu: 500m
       memory: 512Mi
-  
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 5
     targetCPUUtilizationPercentage: 60
-
-
 frontend:
   replicaCount: 1
   image:
     repository: anassnajam/task-frontend
-    tag: f60a99a8dfabea213802a6649cf595686790ed5e
+    tag: 807130bdae0d95939da1a48d654684f206c476e7
   port: 80
-
-
 mongodb:
   image:
     repository: mongo
