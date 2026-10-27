@@ -1,3 +1,5 @@
 argocd-linux-amd64
 ssh_key
 ssh_key.pub
+n8n/.env
+n8n/n8n_data
