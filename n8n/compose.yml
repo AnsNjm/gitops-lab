@@ -14,6 +14,7 @@ services:
       - TZ=Africa/Casablanca
       - GENERIC_TIMEZONE=Africa/Casablanca
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      # for n8n port 5678
       - WEBHOOK_URL=https://unloaded-earthworm-dork.ngrok-free.dev
 
     volumes:
