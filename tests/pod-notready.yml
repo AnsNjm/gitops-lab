@@ -1,3 +1,16 @@
+# This manifest defines a test Pod in the gitops-lab-ns namespace.
+# It uses an NGINX container with an intentionally invalid readiness probe
+# to simulate a readiness failure and test Kubernetes Pod health monitoring.
+# The container remains running, but the Pod will not become Ready because
+# the specified HTTP endpoint does not exist.
+
+# Ce manifeste définit un Pod de test dans le namespace gitops-lab-ns.
+# Il utilise un conteneur NGINX avec une Readiness Probe volontairement invalide
+# afin de simuler un échec de vérification de disponibilité et de tester
+# la supervision de l'état des Pods par Kubernetes.
+# Le conteneur continue de fonctionner, mais le Pod ne passe pas à l'état Ready
+# car le point de terminaison HTTP spécifié n'existe pas.
+
 apiVersion: v1
 kind: Pod
 metadata:
