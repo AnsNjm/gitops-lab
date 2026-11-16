@@ -1,1 +1,0 @@
-make sure to change the api url of the task api when moving to k8s
