@@ -46,8 +46,7 @@ flowchart TD
 | CI/CD | GitLab CI/CD |
 | Container Registry | Docker Hub |
 | Security Scanning | Trivy |
-| Infrastructure as Code | Terraform |
-| Orchestration | Kubernetes (Kind) |
+| Orchestration | Kubernetes |
 | Package Management | Helm |
 | GitOps | Argo CD |
 | Networking | NGINX Ingress Controller, MetalLB |
@@ -55,7 +54,7 @@ flowchart TD
 | Logging | Loki |
 | Alerting | Alertmanager, Discord |
 | Workflow Automation | n8n |
-| Environment | WSL2, Debian |
+| Environment | Debian |
 
 ## ⚙️ Implementation
 
@@ -72,11 +71,7 @@ Implemented an automated GitLab CI/CD pipeline to:
 - Push validated images to Docker Hub.
 - Update the image tags in the GitOps repository.
 
-### 3. Infrastructure as Code – Terraform
-- Used Terraform to practice Infrastructure as Code principles.
-- Organized infrastructure configuration to support reproducible and automated infrastructure management.
-
-### 4. Kubernetes Deployment
+### 3. Kubernetes Deployment
 Deployed the application on a local Kubernetes cluster using Kind.
 
 Implemented:
@@ -93,7 +88,7 @@ Implemented:
 - Maximum replicas: 5
 - Target CPU utilization: 60%
 
-### 5. GitOps – Argo CD & Helm
+### 4. GitOps – Argo CD & Helm
 Implemented GitOps principles using Argo CD and Helm.
 
 The deployment workflow:
@@ -105,7 +100,7 @@ The deployment workflow:
 6. Argo CD synchronizes the desired state with the Kubernetes cluster.
 7. Kubernetes deploys the updated application and pulls the required container images from Docker Hub.
 
-### 6. Monitoring & Logging
+### 5. Monitoring & Logging
 Implemented an observability stack using Prometheus, Grafana, and Loki.
 
 - **Prometheus:** Collects infrastructure and application metrics.
@@ -114,7 +109,7 @@ Implemented an observability stack using Prometheus, Grafana, and Loki.
 - **Alertmanager:** Manages alerts generated from Prometheus rules.
 - **Discord:** Receives alert notifications.
 
-### 7. Workflow Automation – n8n
+### 6. Workflow Automation – n8n
 Integrated n8n as a separate Docker Compose deployment to explore operational automation.
 
 Implemented:
